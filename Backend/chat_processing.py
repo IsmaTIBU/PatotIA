@@ -568,7 +568,7 @@ def processing(prediction, error):
         print(f"Error: {error}")
     else:
         # print("✅ Predicción obtenida:")
-        print(prediction)
+        # print(prediction)
         operacion = prediction["operacion"]
         parametros = prediction["parametros"]
         

@@ -1,0 +1,106 @@
+/* AGREGAR AL FINAL DE TU style.css */
+
+/* Loading message styles */
+.loading-message {
+    background: #f8f9fa !important;
+    border: 2px dashed #ddd !important;
+}
+
+.loading-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.loading-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #667eea;
+    animation: loading-bounce 1.4s infinite both;
+}
+
+.loading-dots .dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loading-dots .dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+.loading-dots .dot:nth-child(3) {
+    animation-delay: 0s;
+}
+
+.loading-text {
+    color: #666;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* AGREGAR ESTO A TU CSS: */
+
+.text-dots {
+    display: inline-block;
+}
+
+.text-dot {
+    display: inline-block;
+    animation: text-bounce 1.4s infinite both;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.text-dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.text-dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+.text-dot:nth-child(3) {
+    animation-delay: 0s;
+}
+
+@keyframes text-bounce {
+    0%, 80%, 100% {
+        transform: translateY(0px);
+        opacity: 0.5;
+    }
+    40% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes loading-bounce {
+    0%, 80%, 100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

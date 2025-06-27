@@ -3,8 +3,11 @@ const chatMessages = document.getElementById('chatMessages');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 
+// URL de la API
+const API_URL = 'http://localhost:5000';
+
 // Función para agregar mensaje al chat
-function addMessage(content, isUser = false) {
+function addMessage(content, isUser = false, isLoading = false) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${isUser ? 'user' : 'robot'}`;
     
@@ -14,7 +17,27 @@ function addMessage(content, isUser = false) {
     
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
-    messageContent.textContent = content;
+    
+    if (isLoading) {
+        messageContent.className += ' loading-message';
+        messageContent.innerHTML = `
+            <div class="loading-container">
+                <div class="loading-text">
+                    Processing
+                    <span class="text-dots">
+                        <span class="text-dot">.</span>
+                        <span class="text-dot">.</span>
+                        <span class="text-dot">.</span>
+                    </span>
+                </div>
+            </div>
+        `;
+    } else {
+        // Preservar saltos de línea y formato
+        messageContent.style.whiteSpace = 'pre-wrap';
+        messageContent.style.fontFamily = 'monospace';
+        messageContent.textContent = content;
+    }
     
     messageDiv.appendChild(avatar);
     messageDiv.appendChild(messageContent);
@@ -23,6 +46,17 @@ function addMessage(content, isUser = false) {
     
     // Scroll hacia abajo
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    return messageDiv; // Retornar para poder modificarlo después
+}
+
+// Función para actualizar mensaje de carga con respuesta real
+function updateLoadingMessage(loadingMessageDiv, content) {
+    const messageContent = loadingMessageDiv.querySelector('.message-content');
+    messageContent.className = 'message-content'; // Quitar clase loading
+    messageContent.style.whiteSpace = 'pre-wrap';
+    messageContent.style.fontFamily = 'monospace';
+    messageContent.textContent = content;
 }
 
 // Función para enviar mensaje
@@ -41,30 +75,37 @@ async function sendMessage() {
     sendButton.disabled = true;
     sendButton.textContent = 'Processing...';
     
+    // MOSTRAR BURBUJA DE CARGA INMEDIATAMENTE
+    const loadingMessage = addMessage('', false, true);
+    
     try {
-        // AQUÍ VA LA LLAMADA A LA API (por ahora simulamos)
-        // await fetch('/chat', { ... })
+        // LLAMADA REAL A LA API (asíncrona)
+        const response = await fetch(`${API_URL}/chat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: message })
+        });
         
-        // SIMULACIÓN temporal - borrar cuando tengas Flask
-        setTimeout(() => {
-            const responses = [
-                "I understand you want to calculate robotics operations. Please provide specific angles or coordinates.",
-                "For forward kinematics, I need three joint angles (q1, q2, q3).",
-                "For inverse kinematics, provide target coordinates (x, y, z).",
-                "For Jacobian calculations, I need joint angles and optionally joint velocities.",
-                "I can also generate 3D simulations of the robot configuration."
-            ];
-            
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            addMessage(randomResponse, false);
-            
-            // Rehabilitar botón
-            sendButton.disabled = false;
-            sendButton.textContent = 'Send';
-        }, 1000);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        
+        // ACTUALIZAR BURBUJA DE CARGA CON RESPUESTA REAL
+        if (data.error) {
+            updateLoadingMessage(loadingMessage, `❌ Error: ${data.error}`);
+        } else {
+            updateLoadingMessage(loadingMessage, data.response);
+        }
         
     } catch (error) {
-        addMessage('Error: Could not connect to Robot AI. Please check if the server is running.', false);
+        console.error('API Error:', error);
+        updateLoadingMessage(loadingMessage, `❌ Connection error: ${error.message}\n\n💡 Make sure the Robot AI server is running:\n   python api.py`);
+    } finally {
+        // Rehabilitar botón
         sendButton.disabled = false;
         sendButton.textContent = 'Send';
     }
@@ -78,8 +119,3 @@ messageInput.addEventListener('keypress', function(e) {
         sendMessage();
     }
 });
-
-// Mensaje de bienvenida adicional
-setTimeout(() => {
-    addMessage("Type 'help' if you need guidance on how to use me!", false);
-}, 500);

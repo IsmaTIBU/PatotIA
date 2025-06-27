@@ -348,10 +348,7 @@ def main():
             elif user_input.lower() in ['clear log', 'clear', 'reset']:
                 print(ai.clear_log())
                 continue
-            
-            # Process robotics command
-            print("🔄 Processing ...")
-            
+                        
             # Get prediction
             
             prediction, error = ai.predict(user_input)

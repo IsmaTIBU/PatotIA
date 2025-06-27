@@ -44,7 +44,11 @@ def generate_cylinder(p1, p2, radius=50, resolution=20):
 
     return x, y, z
 
-def bras_rob_model3D(Liaisons, q):
+simulation_figures = []
+
+def bras_rob_model3D(Liaisons, q, web_mode=True):
+    global simulation_figures
+
     q_rad = np.radians(q)
 
     L1 = Liaisons[0]
@@ -99,4 +103,37 @@ def bras_rob_model3D(Liaisons, q):
         zaxis=dict(title="Z Axis", range=[0, 2 * 2110])
     ))
 
-    return fig.show()
+    if web_mode:
+        # Acumular figura en lugar de mostrarla
+        simulation_figures.append(fig)
+        return fig.to_html(include_plotlyjs='cdn', div_id=f"simulation_{len(simulation_figures)}")
+    else:
+        # Comportamiento normal (mostrar ventana)
+        return fig.show()
+    
+def get_all_simulations_html():
+    """Retorna HTML de todas las simulaciones acumuladas"""
+    global simulation_figures
+    
+    if not simulation_figures:
+        return None
+    
+    # Generar HTML para todas las figuras
+    all_html = ""
+    for i, fig in enumerate(simulation_figures):
+        html = fig.to_html(
+            include_plotlyjs='cdn' if i == 0 else False,  # Solo incluir JS en la primera
+            div_id=f"simulation_{i+1}",
+            config={'displayModeBar': True}
+        )
+        all_html += f"<div class='simulation-container'><h4>Solution {i+1}</h4>{html}</div>"
+    
+    # Limpiar para próxima vez
+    simulation_figures = []
+    
+    return all_html
+
+def clear_simulations():
+    """Limpiar simulaciones acumuladas"""
+    global simulation_figures
+    simulation_figures = []

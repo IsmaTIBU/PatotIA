@@ -1,0 +1,214 @@
+/* Media container styles */
+.media-container {
+    margin-top: 15px;
+    border: 1px solid #e1e5e9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.simulation-header {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.simulation-header h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.simulation-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+/* ALTURA FIJA PARA SIMULACIONES - CORREGIDO */
+.simulation-viewer {
+    height: 500px; /* ← ALTURA FIJA PARA TODAS LAS SIMULACIONES */
+    min-height: 500px; /* ← ALTURA MÍNIMA GARANTIZADA */
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: auto; /* ← Permitir scroll si hay múltiples simulaciones */
+}
+
+.simulation-viewer iframe,
+.simulation-viewer > div {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Para gráficos Plotly embebidos - altura fija también */
+.simulation-viewer .plotly-graph-div {
+    width: 100% !important;
+    height: 500px !important; /* ← ALTURA FIJA */
+    min-height: 500px !important;
+}
+
+.image-container {
+    padding: 15px;
+    text-align: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.chart-container {
+    padding: 15px;
+    background: #f8f9fa;
+}
+
+/* Text response styling */
+.text-response {
+    margin-bottom: 0;
+}
+
+/* Ensure message content has proper structure */
+.message-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mejoras para simulaciones */
+.simulation-status {
+    background: #ffc107;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.simulation-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #666;
+}
+
+.spinner-large {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+/* Forzar renderizado correcto de Plotly - ACTUALIZADO */
+.simulation-viewer > div,
+.simulation-viewer .plotly-graph-div {
+    width: 100% !important;
+    height: 500px !important; /* ← ALTURA FIJA */
+    min-height: 500px !important;
+}
+
+/* Para múltiples simulaciones - distribución vertical */
+.simulation-container {
+    margin-bottom: 20px;
+}
+
+.simulation-container:last-child {
+    margin-bottom: 0;
+}
+
+/* Asegurar que cada simulación individual tenga buen tamaño */
+.simulation-container .plotly-graph-div {
+    height: 400px !important; /* ← Altura individual cuando hay múltiples */
+    min-height: 400px !important;
+}
+
+/* Asegurar que los scripts de Plotly se ejecuten */
+.simulation-viewer script {
+    display: block !important;
+}
+
+.simulation-viewer-fixed {
+    height: 500px !important;
+    min-height: 500px !important;
+    max-height: 500px !important;
+    overflow: auto !important;
+}
+
+.simulation-viewer-fixed iframe {
+    height: 500px !important;
+    min-height: 500px !important;
+    max-height: 500px !important;
+}
+
+/* Wrapper para contenido Plotly con altura controlada */
+.plotly-container-wrapper {
+    height: 500px !important;
+    min-height: 500px !important;
+    max-height: 500px !important;
+    overflow: auto !important;
+}
+
+/* Forzar que cada simulación individual ocupe altura específica */
+.plotly-container-wrapper .simulation-container {
+    height: auto !important;
+    margin-bottom: 10px;
+}
+
+.plotly-container-wrapper .plotly-graph-div {
+    height: 480px !important;
+    min-height: 480px !important;
+    width: 100% !important;
+}
+
+/* Para casos de múltiples simulaciones - distribuir espacio */
+.plotly-container-wrapper .simulation-container:only-child .plotly-graph-div {
+    height: 480px !important; /* Una sola simulación ocupa casi todo el espacio */
+}
+
+/* Cuando hay múltiples, cada una ocupa menos espacio pero el contenedor total sigue siendo 500px */
+.plotly-container-wrapper .simulation-container:not(:only-child) .plotly-graph-div {
+    height: 300px !important; /* Múltiples simulaciones más pequeñas */
+    min-height: 300px !important;
+}
+
+/* Animation para el spinner grande */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes loading-bounce {
+    0%, 80%, 100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes text-bounce {
+    0%, 80%, 100% {
+        transform: translateY(0px);
+        opacity: 0.5;
+    }
+    40% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}

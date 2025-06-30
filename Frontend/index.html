@@ -7,27 +7,73 @@
     <link rel="stylesheet" href="css/importations.css">
 </head>
 <body>
-    <!-- CHAT SECTION -->
-    <div class="chat-container">
-        <div class="chat-header">
-            <h1>🤖 Robot AI Assistant</h1>
-            <p>3DOF KUKA-RX160 Robotics Calculator</p>
-        </div>
+    <div class="main-container">
+        <!-- CHAT SECTION -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <h1>🤖 Robot AI Assistant</h1>
+                <p>3DOF KUKA-RX160 Robotics Calculator</p>
+            </div>
 
-        <div class="chat-messages" id="chatMessages">
-            <div class="message robot">
-                <div class="message-avatar">🤖</div>
-                <div class="message-content">
-                    Welcome to Robot-AI! I'm specialized in robotics calculations for a 3DOF KUKA-RX160 robotic arm. 
-                    Ask me about forward kinematics, inverse kinematics, Jacobian calculations, or 3D simulations!
+            <div class="chat-messages" id="chatMessages">
+                <div class="message robot">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        Welcome to Robot-AI! I'm specialized in robotics calculations for a 3DOF KUKA-RX160 robotic arm. 
+                        Type 'examples' or press 'e' to see the types of calculations I can perform.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <input type="text" class="chat-input" id="messageInput" placeholder="Ask me about robotics calculations..." />
+                    <button class="send-button" id="sendButton">Send</button>
                 </div>
             </div>
         </div>
 
-        <div class="chat-input-container">
-            <div class="chat-input-wrapper">
-                <input type="text" class="chat-input" id="messageInput" placeholder="Ask me about robotics calculations..." />
-                <button class="send-button" id="sendButton">Send</button>
+        <!-- ROBOT REFERENCE SECTION -->
+        <div class="robot-reference">
+            <div class="reference-header">
+                <h3>📐 Robot Parameters</h3>
+                <p>3DOF KUKA-RX160 Dimensions</p>
+            </div>
+            
+            <div class="robot-image-container">
+                <img src="media/Staubli_dimensions.png" alt="KUKA-RX160 Robot Dimensions" class="robot-image" />
+                <div class="image-placeholder">
+                    <div class="placeholder-icon">🤖</div>
+                    <p>Robot Dimensions Image</p>
+                    <small>Place your robot diagram here<br/>images/robot-dimensions.png</small>
+                </div>
+            </div>
+            
+            <div class="parameters-info">
+                <h4>📊 Quick Reference</h4>
+                <div class="parameter-item">
+                    <span class="param-label">Joint 1 (θ₁):</span>
+                    <span class="param-value">Base rotation</span>
+                </div>
+                <div class="parameter-item">
+                    <span class="param-label">Joint 2 (θ₂):</span>
+                    <span class="param-value">Shoulder elevation</span>
+                </div>
+                <div class="parameter-item">
+                    <span class="param-label">Joint 3 (θ₃):</span>
+                    <span class="param-value">Elbow flexion</span>
+                </div>
+                
+                <div class="parameter-divider"></div>
+                
+                <div class="parameter-item">
+                    <span class="param-label">Workspace:</span>
+                    <span class="param-value">±2110mm range</span>
+                </div>
+                <div class="parameter-item">
+                    <span class="param-label">DOF:</span>
+                    <span class="param-value">3 degrees of freedom</span>
+                </div>
             </div>
         </div>
     </div>

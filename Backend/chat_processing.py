@@ -230,7 +230,7 @@ def simulation(parametros):
             q3 = round(m.degrees(q3), 2)
 
         q = [q1, q2, q3]
-        bras_rob_model3D(Liaisons, q)
+        bras_rob_model3D(Liaisons, q, web_mode=True)
         return  # ✅ IMPORTANTE: salir después de ejecutar
     
     # CASO 2: Tenemos coordenadas de posición del efector
@@ -259,7 +259,7 @@ def simulation(parametros):
         for i, solution in enumerate(sol):
             angles_deg = np.degrees(solution)
             print(f"  Solution {i+1}: {angles_deg}")
-            bras_rob_model3D(Liaisons, angles_deg)
+            bras_rob_model3D(Liaisons, angles_deg, web_mode=True)
         return  # ✅ IMPORTANTE: salir después de ejecutar
     
     # CASO 3: No tenemos datos directos - buscar en logs

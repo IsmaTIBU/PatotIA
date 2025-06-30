@@ -197,9 +197,6 @@ class RoboticsAI:
         """Show help information"""
         
         help_text = """
-🤖 ROBOTICS ASSISTANT - HELP
-============================
-
 DESCRIPTION:
 ---------------------
 I am a trained model specialiced on understanding natural language to realize basic robotics 
@@ -234,30 +231,38 @@ SPECIAL COMMANDS:
         """Show more examples"""
         
         examples = """
-📚 ADDITIONAL EXAMPLES
-=====================
+TRANSFORMATION MATRICES:
+------------------
+• "What are the transformation matrices when all the joints are in 56°?"
+• "I would like to know the matrices when angle1=pi/2, angle2=-pi/4 and angle3=8pi/3"
+• "Calculate the matrices with 34°, 89°, -68°"
+• "I want the tranformation matrices"
 
 FORWARD KINEMATICS:
 ------------------
 • "What's the end position with angles 30°, 60°, 90°?"
 • "Calculate forward kinematics for π/4, π/2, 3π/4"
 • "End effector position with 1.2, 0.8, 1.5 radians"
+• "I want the robot's position"
 
 INVERSE KINEMATICS:
 ------------------
 • "I want to position the robot at (200, 300, 400) mm"
 • "Angles to reach 0.5, 1.0, 1.5 meters"
 • "Set arm to reach 25cm, 35cm, 45cm"
+• "What is the configuration of the robot?"
 
 JACOBIAN:
 --------
 • "Jacobian with angles 45°, 90°, 135° and velocities 2, 1.5, 3 rad/s"
-• "Velocity analysis for configuration π/6, π/3, π/2"
+• "What's the jacobian of the robot when all the angles are 25 degrees?"
+• "Joint velocities are streaming at [0.8|2.4|1.6] radians per second, need jacobian analysis"
+• "What is the jacobian?"
 
 SIMULATION:
 ----------
 • "Visualize robot in 3D with configuration 72°, 144°, 216°"
-• "Simulate arm reaching (300, 400, 500) mm"
+• "Simulate the robot end effector in the coordinates x=896, y=677 and z=-564 mm"
 • "Render robot in position 1.0, 1.5, 2.0 rad"
 
 GENERAL QUERIES:
@@ -272,9 +277,6 @@ GENERAL QUERIES:
         """Get system status"""
         
         status = f"""
-🔍 ESTADO DEL SISTEMA
-====================
-
 Model: {self.model_status}
 Device: {self.config['device']}
 PyTorch: {torch.__version__}
@@ -337,7 +339,7 @@ def main():
                 print(ai.show_examples())
                 continue
             
-            elif user_input.lower() in ['status', 's']:
+            elif user_input.lower() in ['status', 'state', 's']:
                 print(ai.get_system_status())
                 continue
 

@@ -68,17 +68,20 @@ def process_user_input(user_input):
         elif user_input.lower() in ['clear log', 'clear', 'reset']:
             print(ai.clear_log())
             return output_buffer.getvalue(), None, None
-                
+        
+        # Process robotics command (igual que en model_chat.py)
+        # print("🔄 Processing ...")
+        
         # Get prediction (EXACTAMENTE como en model_chat.py)
         prediction, error = ai.predict(user_input)
         
         # ACTIVAR WEB MODE si es simulación
         if prediction and prediction.get('operacion') == 'simulacion_3d':
             try:
-                import src
-                src.WEB_MODE = True  # Flag global para activar web mode
-            except (ImportError, AttributeError):
-                pass  # Si no existe WEB_MODE, continuar normal
+                from src import Robot_repr
+                Robot_repr.clear_simulations()  # Limpiar simulaciones previas
+            except ImportError:
+                pass
         
         # Importar processing desde chat_processing (como en model_chat.py)
         from chat_processing import processing
@@ -88,12 +91,14 @@ def process_user_input(user_input):
         simulations_html = None
         if prediction and prediction.get('operacion') == 'simulacion_3d':
             try:
-                from src import get_all_simulations_html
+                from src.Robot_repr import get_all_simulations_html
                 simulations_html = get_all_simulations_html()
-                src.WEB_MODE = False  # Desactivar web mode
-            except ImportError:
-                # Si no existe la función de múltiples simulaciones, 
-                # usar método alternativo o mantener comportamiento actual
+                # print(f"✅ HTML generado: {len(simulations_html) if simulations_html else 0} caracteres")
+            except ImportError as e:
+                print(f"❌ Error importando: {e}")
+                simulations_html = None
+            except Exception as e:
+                print(f"❌ Error procesando simulaciones: {e}")
                 simulations_html = None
     
     # Retornar texto, predicción Y simulaciones
@@ -130,9 +135,9 @@ def chat():
         # USAR DIRECTAMENTE model_chat.py con soporte para múltiples simulaciones
         response_text, prediction, simulations_html = process_user_input(user_message)
         
-        # Si no hay respuesta, dar mensaje por defecto
-        if not response_text.strip():
-            response_text = "✅ Command processed successfully."
+        # # Si no hay respuesta, dar mensaje por defecto
+        # if not response_text.strip():
+        #     response_text = "✅ Command processed successfully."
         
         print(f"📤 Sending response...")
         
@@ -185,7 +190,7 @@ if __name__ == '__main__':
     
     try:
         # Precargar modelo (como en model_chat.py)
-        print("Initializing AI...")
+        # print("Initializing AI...")
         get_ai_instance()
         print("✅ AI ready!")
         

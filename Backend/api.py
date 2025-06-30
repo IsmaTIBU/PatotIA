@@ -1,3 +1,18 @@
+import os
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+
+# PARCHE PARA TORCH.LOAD
+import warnings
+warnings.filterwarnings("ignore", message=".*torch.load.*")
+warnings.filterwarnings("ignore", message=".*weights_only.*")
+
+import torch
+original_load = torch.load
+def patched_load(*args, **kwargs):
+    kwargs.pop('weights_only', None)
+    return original_load(*args, **kwargs)
+torch.load = patched_load
+
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import io
@@ -193,9 +208,6 @@ if __name__ == '__main__':
         # print("Initializing AI...")
         get_ai_instance()
         print("✅ AI ready!")
-        
-        print("\n💡 Open your browser and go to: http://localhost:5000")
-        print("🚪 Press Ctrl+C to stop the server")
         print("="*60)
         
         app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)

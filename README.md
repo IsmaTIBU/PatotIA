@@ -11,7 +11,8 @@
 From the root of the cloned directory, run these commands:
 
 1. `pip install -r requirements.txt`
-2. `python .\Backend\api.py`
+2. `cd .\Backend`
+3. `python .\api.py`
 
 ## Expected Output
 After running the commands, you should see the following output in your terminal (it may take some time):

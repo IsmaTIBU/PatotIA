@@ -2,6 +2,13 @@
 # ROBOTICS AI CHAT INTERFACE - USER EXPERIENCE SIMULATOR
 # =============================================================================
 
+import os
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+
+import warnings
+warnings.filterwarnings("ignore", message=".*torch.load.*")
+warnings.filterwarnings("ignore", message=".*weights_only.*")
+
 import sys
 import os
 import json

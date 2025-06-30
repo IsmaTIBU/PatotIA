@@ -14,7 +14,7 @@ From the root of the cloned directory, run these commands:
 2. `python .\Backend\api.py`
 
 ## Expected Output
-After running the commands, you should see the following output in your terminal:
+After running the commands, you should see the following output in your terminal (it may take some time):
 
 ```
 ============================================================

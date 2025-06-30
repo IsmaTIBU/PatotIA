@@ -5,17 +5,17 @@ import os
 def verify_downloaded_model(model_path, hash_file_path):
     """Verifica un modelo descargado usando el archivo hash"""
     
-    print("VERIFICANDO MODELO DESCARGADO")
+    print("VERIFYING LOADED MODEL")
     print("=" * 40)
     
     try:
         # Verificar que ambos archivos existen
         if not os.path.exists(model_path):
-            print(f"ERROR: Archivo de modelo no encontrado: {model_path}")
+            print(f"ERROR: Model's file not found: {model_path}")
             return False
             
         if not os.path.exists(hash_file_path):
-            print(f"ERROR: Archivo de hash no encontrado: {hash_file_path}")
+            print(f"ERROR: Hash file not found: {hash_file_path}")
             return False
         
         # Leer hash original
@@ -28,38 +28,38 @@ def verify_downloaded_model(model_path, hash_file_path):
                     break
         
         if not original_hash:
-            print("ERROR: No se encontro hash MD5 en el archivo de verificacion")
+            print("ERROR: Couldn't find MD5 file")
             return False
         
-        print(f"Verificando archivo: {model_path}")
-        print(f"Usando hash de: {hash_file_path}")
-        print(f"Hash esperado: {original_hash}")
+        print(f"Verifying file: {model_path}")
+        print(f"Using hash: {hash_file_path}")
+        print(f"Expected Hash: {original_hash}")
         
         # Calcular hash del archivo descargado
-        print("Calculando hash del archivo descargado...")
+        print("Calculating the model's hash...")
         with open(model_path, 'rb') as f:
             downloaded_hash = hashlib.md5(f.read()).hexdigest()
         
-        print(f"Hash calculado: {downloaded_hash}")
+        print(f"Calculated hash: {downloaded_hash}")
         
         # Comparar
         if original_hash == downloaded_hash:
-            print("SUCCESS: VERIFICACION EXITOSA - El archivo esta integro")
+            print("SUCCESS: SUCCESSFULL DOWNLOAD")
             return True
         else:
-            print("ERROR: VERIFICACION FALLIDA - El archivo esta corrupto")
-            print(f"   Hash original:    {original_hash}")
-            print(f"   Hash descargado:  {downloaded_hash}")
+            print("ERROR: UNSUCCESSFULL VERIFICATION - file may be corrupted")
+            print(f"   Original hash:    {original_hash}")
+            print(f"   Downloaded hash:  {downloaded_hash}")
             return False
             
     except Exception as e:
-        print(f"ERROR verificando archivo: {e}")
+        print(f"ERROR verifying file: {e}")
         return False
 
 def verify_model_interactive():
     """Version interactiva para usar desde la consola"""
     
-    print("VERIFICADOR DE MODELOS INTERACTIVO")
+    print("MODEL VERIFYER")
     print("=" * 50)
     
     # Buscar archivos automaticamente
@@ -67,34 +67,34 @@ def verify_model_interactive():
     pth_files = [f for f in os.listdir('.') if f.endswith('.pth')]
     hash_files = [f for f in os.listdir('.') if f.endswith('_hash.txt')]
     
-    print(f"Directorio actual: {current_dir}")
-    print(f"Archivos .pth encontrados: {pth_files}")
-    print(f"Archivos *_hash.txt encontrados: {hash_files}")
+    print(f"Present folder: {current_dir}")
+    print(f".pth files found: {pth_files}")
+    print(f"*_hash.txt files found: {hash_files}")
     
     if not pth_files:
-        print("No se encontraron archivos .pth en el directorio actual")
+        print("Couldn't find .pth files in the current directory")
         return False
     
     if not hash_files:
-        print("No se encontraron archivos _hash.txt en el directorio actual")
+        print("Courldn't find _hash.txt in the current directory")
         return False
     
     # Si hay un solo par, usarlos automaticamente
     if len(pth_files) == 1 and len(hash_files) == 1:
         model_file = pth_files[0]
         hash_file = hash_files[0]
-        print(f"Usando automaticamente: {model_file} y {hash_file}")
+        print(f"Using: {model_file} and {hash_file}")
     else:
         # Permitir seleccion manual
-        print("Multiples archivos encontrados. Selecciona:")
+        print("Multiple files found. Select:")
         for i, f in enumerate(pth_files):
             print(f"  {i+1}. {f}")
         
         try:
-            choice = int(input("Selecciona el numero del archivo .pth: ")) - 1
+            choice = int(input("Select the .pth number file: ")) - 1
             model_file = pth_files[choice]
         except (ValueError, IndexError):
-            print("Seleccion invalida")
+            print("Invalid selection")
             return False
         
         # Buscar hash correspondiente
@@ -102,7 +102,7 @@ def verify_model_interactive():
         hash_file = base_name + '_hash.txt'
         
         if hash_file not in hash_files:
-            print(f"No se encontro archivo hash correspondiente: {hash_file}")
+            print(f"Couldn't find a corresponding hash file: {hash_file}")
             return False
     
     # Verificar
@@ -110,10 +110,10 @@ def verify_model_interactive():
 
 # EJEMPLO DE USO:
 if __name__ == "__main__":
-    print("Iniciando verificacion interactiva...")
+    print("\nInitiating verification...")
     success = verify_model_interactive()
     
     if success:
-        print("El modelo esta listo para usar!")
+        print("Model is ready to use!n")
     else:
-        print("El modelo necesita ser descargado nuevamente")
+        print("Model needs to be downloaded again\n")

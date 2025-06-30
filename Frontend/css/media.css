@@ -1,10 +1,13 @@
-/* Media container styles */
+/* Media container styles - SOLO LA SIMULACIÓN TIENE ANCHURA FIJA */
 .media-container {
     margin-top: 15px;
     border: 1px solid #e1e5e9;
     border-radius: 12px;
     overflow: hidden;
     background: #fff;
+    /* width: 100px; ← ANCHURA FIJA SOLO PARA LA SIMULACIÓN */
+    min-width: 575px;
+    max-width: 800px;
 }
 
 .simulation-header {
@@ -29,16 +32,16 @@
     font-size: 0.8rem;
 }
 
-/* ALTURA FIJA PARA SIMULACIONES - CORREGIDO */
+/* ANCHURA FIJA SOLO PARA EL VISOR DE SIMULACIÓN */
 .simulation-viewer {
-    height: 500px; /* ← ALTURA FIJA PARA TODAS LAS SIMULACIONES */
-    min-height: 500px; /* ← ALTURA MÍNIMA GARANTIZADA */
+    height: 500px;
+    width: 100%;
     background: #f8f9fa;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: auto; /* ← Permitir scroll si hay múltiples simulaciones */
+    overflow: auto;
 }
 
 .simulation-viewer iframe,
@@ -48,11 +51,34 @@
     border: none;
 }
 
-/* Para gráficos Plotly embebidos - altura fija también */
-.simulation-viewer .plotly-graph-div {
+/* Simulation container individual */
+.simulation-container {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.simulation-container h4 {
+    background: #f8f9fa;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid #e1e5e9;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Para gráficos Plotly embebidos */
+.simulation-viewer .plotly-graph-div,
+.simulation-container .plotly-graph-div {
     width: 100% !important;
-    height: 500px !important; /* ← ALTURA FIJA */
-    min-height: 500px !important;
+    height: 400px !important;
+    min-height: 400px !important;
 }
 
 .image-container {
@@ -72,15 +98,21 @@
     background: #f8f9fa;
 }
 
-/* Text response styling */
+/* Text response styling - SIN ANCHURA FIJA */
 .text-response {
     margin-bottom: 0;
+    /* Quitar width: 100% para que se ajuste al contenido */
 }
 
-/* Ensure message content has proper structure */
+/* BURBUJAS DE MENSAJES - SIEMPRE SE AJUSTAN AL CONTENIDO */
 .message-content {
     display: flex;
     flex-direction: column;
+    /* QUITAR todas las reglas de anchura fija */
+    /* Las burbujas se ajustan naturalmente al contenido */
+    box-sizing: border-box;
+    max-width: 70%; /* Mantener límite máximo */
+    width: auto; /* ← CLAVE: auto para ajustarse al contenido */
 }
 
 /* Mejoras para simulaciones */
@@ -101,6 +133,7 @@
     justify-content: center;
     height: 100%;
     color: #666;
+    width: 100%;
 }
 
 .spinner-large {
@@ -113,27 +146,21 @@
     margin-bottom: 15px;
 }
 
-/* Forzar renderizado correcto de Plotly - ACTUALIZADO */
-.simulation-viewer > div,
-.simulation-viewer .plotly-graph-div {
+/* Forzar anchura fija SOLO en el visor */
+.simulation-viewer-fixed {
     width: 100% !important;
-    height: 500px !important; /* ← ALTURA FIJA */
-    min-height: 500px !important;
+    overflow: auto !important;
 }
 
-/* Para múltiples simulaciones - distribución vertical */
-.simulation-container {
-    margin-bottom: 20px;
+.simulation-viewer-fixed iframe {
+    width: 100% !important;
 }
 
-.simulation-container:last-child {
-    margin-bottom: 0;
-}
-
-/* Asegurar que cada simulación individual tenga buen tamaño */
-.simulation-container .plotly-graph-div {
-    height: 400px !important; /* ← Altura individual cuando hay múltiples */
-    min-height: 400px !important;
+/* Wrapper para contenido Plotly */
+.plotly-container-wrapper {
+    width: 100% !important;
+    overflow: auto !important;
+    box-sizing: border-box;
 }
 
 /* Asegurar que los scripts de Plotly se ejecuten */
@@ -141,49 +168,11 @@
     display: block !important;
 }
 
-.simulation-viewer-fixed {
-    height: 500px !important;
-    min-height: 500px !important;
-    max-height: 500px !important;
-    overflow: auto !important;
-}
+/* ELIMINAR TODAS LAS REGLAS QUE FUERZAN ANCHURA EN BURBUJAS */
+/* Las burbujas deben ajustarse naturalmente a su contenido */
 
-.simulation-viewer-fixed iframe {
-    height: 500px !important;
-    min-height: 500px !important;
-    max-height: 500px !important;
-}
-
-/* Wrapper para contenido Plotly con altura controlada */
-.plotly-container-wrapper {
-    height: 500px !important;
-    min-height: 500px !important;
-    max-height: 500px !important;
-    overflow: auto !important;
-}
-
-/* Forzar que cada simulación individual ocupe altura específica */
-.plotly-container-wrapper .simulation-container {
-    height: auto !important;
-    margin-bottom: 10px;
-}
-
-.plotly-container-wrapper .plotly-graph-div {
-    height: 480px !important;
-    min-height: 480px !important;
-    width: 100% !important;
-}
-
-/* Para casos de múltiples simulaciones - distribuir espacio */
-.plotly-container-wrapper .simulation-container:only-child .plotly-graph-div {
-    height: 480px !important; /* Una sola simulación ocupa casi todo el espacio */
-}
-
-/* Cuando hay múltiples, cada una ocupa menos espacio pero el contenedor total sigue siendo 500px */
-.plotly-container-wrapper .simulation-container:not(:only-child) .plotly-graph-div {
-    height: 300px !important; /* Múltiples simulaciones más pequeñas */
-    min-height: 300px !important;
-}
+/* Solo mensajes con simulaciones tendrán contenido más ancho debido al .media-container */
+/* Pero la burbuja en sí se ajusta automáticamente */
 
 /* Animation para el spinner grande */
 @keyframes spin {

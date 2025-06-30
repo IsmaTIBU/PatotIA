@@ -11,7 +11,7 @@ def get_all_simulations_html():
     if not simulation_figures:
         return None
     
-    # Generar HTML para todas las figuras
+    # CAMBIO PRINCIPAL: SIEMPRE usar simulation-container wrapper
     all_html = ""
     for i, fig in enumerate(simulation_figures):
         html = fig.to_html(
@@ -19,6 +19,8 @@ def get_all_simulations_html():
             div_id=f"simulation_{i+1}",
             config={'displayModeBar': True}
         )
+        
+        # SIEMPRE envolver en simulation-container, incluso para UNA sola simulación
         all_html += f"<div class='simulation-container'><h4>Solution {i+1}</h4>{html}</div>"
     
     # Limpiar para próxima vez

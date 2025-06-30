@@ -59,14 +59,29 @@ function updateLoadingMessage(loadingMessageDiv, content) {
     messageContent.textContent = content;
 }
 
-// NUEVA: Función para actualizar con simulación (CORREGIDA para Plotly)
+// NUEVA: Función para formatear el texto de soluciones
+function formatSolutionsText(textContent) {
+    // Si el texto contiene "Solution", reformatearlo
+    if (textContent.includes('Solution')) {
+        return textContent
+            .replace(/Solution \d+:/g, '\n$&') // Añadir salto de línea antes de cada "Solution X:"
+            .replace(/^\n/, '') // Quitar salto de línea inicial si existe
+            .trim();
+    }
+    return textContent;
+}
+
+// NUEVA: Función para actualizar con simulación (MEJORADA para formato)
 function updateLoadingMessageWithSimulation(loadingMessageDiv, textContent, simulationHtml) {
     const messageContent = loadingMessageDiv.querySelector('.message-content');
-    messageContent.className = 'message-content'; // Quitar clase loading
+    messageContent.className = 'message-content simulation-message';
     
-    // Crear estructura con texto y simulación SIEMPRE con altura fija
+    // Formatear el texto de soluciones
+    const formattedText = formatSolutionsText(textContent);
+    
+    // Crear estructura con texto formateado y simulación
     messageContent.innerHTML = `
-        <div class="text-response">${textContent}</div>
+        <div class="text-response" style="white-space: pre-line; font-family: monospace;">${formattedText}</div>
         <div class="media-container">
             <div class="simulation-header">
                 <h4>🤖 3D Robot Simulation</h4>
@@ -81,60 +96,34 @@ function updateLoadingMessageWithSimulation(loadingMessageDiv, textContent, simu
         </div>
     `;
     
-    // Inyectar HTML de Plotly de forma correcta
+    // Resto del código igual...
     setTimeout(() => {
         const simViewer = messageContent.querySelector('.simulation-viewer');
         const statusSpan = messageContent.querySelector('.simulation-status');
         
         try {
-            // MÉTODO 1: Crear iframe con el HTML de Plotly
             const iframe = document.createElement('iframe');
             iframe.style.width = '100%';
-            iframe.style.height = '500px'; // ← ALTURA FIJA SIEMPRE
+            iframe.style.height = '500px';
             iframe.style.border = 'none';
             iframe.srcdoc = simulationHtml;
             
-            // Limpiar y agregar iframe
             simViewer.innerHTML = '';
             simViewer.appendChild(iframe);
             
             statusSpan.textContent = 'Interactive';
             statusSpan.style.background = '#28a745';
             
-            console.log('✅ Simulación cargada en iframe con altura fija');
+            console.log('✅ Simulación cargada en iframe con anchura fija');
             
         } catch (error) {
-            // MÉTODO 2: Fallback - inyección directa con scripts
             console.log('⚠️ Iframe fallido, intentando inyección directa');
             
-            // Envolver el HTML en un contenedor con altura fija
             simViewer.innerHTML = `
                 <div class="plotly-container-wrapper" style="width: 100%; height: 500px; overflow: auto;">
                     ${simulationHtml}
                 </div>
             `;
-            
-            // Ejecutar scripts de Plotly manualmente
-            const scripts = simViewer.querySelectorAll('script');
-            scripts.forEach(script => {
-                try {
-                    const newScript = document.createElement('script');
-                    newScript.textContent = script.textContent;
-                    document.head.appendChild(newScript);
-                    setTimeout(() => document.head.removeChild(newScript), 100);
-                } catch (e) {
-                    console.log('Script execution error:', e);
-                }
-            });
-            
-            // Forzar altura en todos los elementos Plotly dentro del wrapper
-            setTimeout(() => {
-                const plotlyDivs = simViewer.querySelectorAll('.plotly-graph-div');
-                plotlyDivs.forEach(div => {
-                    div.style.height = '480px'; // Un poco menos para el scroll
-                    div.style.width = '100%';
-                });
-            }, 1000);
             
             statusSpan.textContent = 'Loaded';
             statusSpan.style.background = '#17a2b8';

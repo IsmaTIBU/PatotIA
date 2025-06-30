@@ -1,4 +1,4 @@
-# Robot AI Project - Work in progress
+# Robot AI Project
 
 ## Setup Instructions
 

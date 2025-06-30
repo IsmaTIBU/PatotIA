@@ -244,14 +244,14 @@ def simulation(parametros):
         z = float(parametros["posicion_efector"]["z"])
 
         if parametros["posicion_efector"]["unidad_posicion"]=="cm":
-            x=x/10
-            y=y/10
-            z=z/10
+            x=x*10
+            y=y*10
+            z=z*10
         
         if parametros["posicion_efector"]["unidad_posicion"]=="m":
-            x=x/1000
-            y=y/1000
-            z=z/1000
+            x=x*1000
+            y=y*1000
+            z=z*1000
                 
         Xd = [x, y, z]
         sol = mgi(Xd, Liaisons)
@@ -298,7 +298,7 @@ def simulation(parametros):
                     }
                 }
                 
-                print(f"\nSorry I couldn't find any specified coordinates in your query\nSo I used the ones you talked about recently; x={coord_from_log['x']}°, y={coord_from_log['y']}°, z={coord_from_log['z']}°\nType 'help' or 'h' if you need some guidance\n")
+                print(f"\nSorry I couldn't find any specified coordinates in your query\nSo I used the ones you talked about recently; x={coord_from_log['x']}{resultado_verificacion_coord['position_unit']}, y={coord_from_log['y']}{resultado_verificacion_coord['position_unit']}, z={coord_from_log['z']}{resultado_verificacion_coord['position_unit']}\nType 'help' or 'h' if you need some guidance\n")
                 simulation(temp_parametros)
 
         # Subcase 3.2: Solo tenemos ángulos
@@ -328,7 +328,7 @@ def simulation(parametros):
                 }
             }
             
-            print(f"\nSorry I couldn't find any specified coordinates in your query\nSo I used the ones you talked about recently; x={coord_from_log['x']}°, y={coord_from_log['y']}°, z={coord_from_log['z']}°\nType 'help' or 'h' if you need some guidance\n")
+            print(f"\nSorry I couldn't find any specified coordinates in your query\nSo I used the ones you talked about recently; x={coord_from_log['x']}{resultado_verificacion_coord['position_unit']}, y={coord_from_log['y']}{resultado_verificacion_coord['position_unit']}, z={coord_from_log['z']}{resultado_verificacion_coord['position_unit']}\nType 'help' or 'h' if you need some guidance\n")
             simulation(temp_parametros)
 
         # Subcase 3.4: No tenemos nada
@@ -400,14 +400,14 @@ def invert_kine(parametros):
         z = float(parametros["posicion_objetivo"]["z"])
 
         if parametros["posicion_objetivo"]["unidad_posicion"]=="cm":
-            x=x/10
-            y=y/10
-            z=z/10
+            x=x*10
+            y=y*10
+            z=z*10
         
         if parametros["posicion_objetivo"]["unidad_posicion"]=="m":
-            x=x/1000
-            y=y/1000
-            z=z/1000
+            x=x*1000
+            y=y*1000
+            z=z*1000
                 
         Xd = [x, y, z]
         sol = mgi(Xd, Liaisons)
@@ -429,11 +429,11 @@ def invert_kine(parametros):
                 'x': coord_from_log['x'],
                 'y': coord_from_log['y'],
                 'z': coord_from_log['z'],
-                'unidad_posicion': resultado_verificacion['position_unit'], }}
+                'unidad_posicion': resultado_verificacion['position_unit']}}
             
             # print(temp_parametros,"\n")
             # Llamar recursivamente con los parámetros del log
-            print(f"\nSorry I couldn't find any specified coordinates in your query\nSo I used the ones you talked about recently; x={coord_from_log['x']}°, y={coord_from_log['y']}°, z={coord_from_log['z']}°\nType 'help' or 'h' if you need some guidance\n")
+            print(f"\nSorry I couldn't find any specified coordinates in your query\nSo I used the ones you talked about recently; x={coord_from_log['x']}{resultado_verificacion['position_unit']}, y={coord_from_log['y']}{resultado_verificacion['position_unit']}, z={coord_from_log['z']}{resultado_verificacion['position_unit']}\nType 'help' or 'h' if you need some guidance\n")
             invert_kine(temp_parametros)
         else:
             print(f"\nSorry I couldn't find any specified coordinates in your present query or recent ones\nType 'help' or 'h' if you need some guidance\nOr re-phrase the sentence, remember that for the moment I'am a quite limited model, sorry for the inconvenience...\n")

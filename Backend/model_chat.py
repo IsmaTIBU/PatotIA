@@ -49,7 +49,7 @@ class RoboticsAI:
     def load_model(self):
         """Load the robotics model"""
         
-        print("🤖 Initializing Robot-AI ...")
+        print("Initializing Robot-AI ...")
         print("=" * 60)
         
         try:
@@ -58,7 +58,7 @@ class RoboticsAI:
             self.tokenizer = AutoTokenizer.from_pretrained(self.config['model_name'])
             
             # Load base model
-            print("🏗️ Loading trained model...")
+            print("Loading trained model...")
             self.model = AutoModelForSeq2SeqLM.from_pretrained(self.config['model_name'])
             
             # Try to load trained weights

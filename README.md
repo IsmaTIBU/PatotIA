@@ -21,14 +21,11 @@ After running the commands, you should see the following output in your terminal
 ============================================================
 🤖 ROBOT AI WEB SERVER
 ============================================================
-🤖 Initializing Robot-AI ...
+Initializing Robot-AI ...
 ============================================================
-🏗️ Loading trained model...
+Loading trained model...
 ✅ Model loaded and ready to use!
 ✅ AI ready!
-
-💡 Open your browser and go to: http://localhost:5000
-🚪 Press Ctrl+C to stop the server
 ============================================================
  * Serving Flask app 'api'
  * Debug mode: off

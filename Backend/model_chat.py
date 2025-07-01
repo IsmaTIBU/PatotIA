@@ -271,12 +271,6 @@ SIMULATION:
 • "Visualize robot in 3D with configuration 72°, 144°, 216°"
 • "Simulate the robot end effector in the coordinates x=896, y=677 and z=-564 mm"
 • "Render robot in position 1.0, 1.5, 2.0 rad"
-
-GENERAL QUERIES:
----------------
-• "How does forward kinematics work?"
-• "Explain DH parameters to me"
-• "What is the Jacobian?"
 """
         return examples
     

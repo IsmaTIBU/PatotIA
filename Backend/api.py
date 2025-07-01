@@ -132,6 +132,10 @@ def css_files(filename):
 def script_file():
     return send_from_directory('../Frontend', 'script.js')
 
+@app.route('/media/<path:filename>')
+def media_files(filename):
+    return send_from_directory('../Frontend/media', filename)
+
 @app.route('/chat', methods=['POST'])
 def chat():
     """

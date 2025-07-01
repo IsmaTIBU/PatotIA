@@ -1,4 +1,4 @@
-# Robot AI Project - Work in progress
+# Robot AI Project
 
 ## Setup Instructions
 
@@ -10,7 +10,7 @@
 ### Execution Steps
 From the root of the cloned directory, run these commands:
 
-1. `pip install -r requirements.txt`
+1. `pip install -r required.txt`
 2. `cd .\Backend`
 3. `python .\api.py`
 

@@ -35,4 +35,4 @@ Vous pouvez accéder à l'application en :
 2. Visitant `http://127.0.0.1:5000` dans votre navigateur web préféré.
 ## Évolution du Projet
 - Chemin de développement : Ollama + détection de motifs → FlanT5 → CodeT5
-- Précision atteinte : 86,52% (sur 100 tests)
+- Précision atteinte : 92.94% (sur 100 tests)

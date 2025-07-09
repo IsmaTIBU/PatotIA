@@ -33,7 +33,7 @@ class RoboticsAI:
         
         self.config = {
             'model_name': 'Salesforce/codet5-base',
-            'model_path': './models/model_8652.pth',
+            'model_path': './models/model_8427.pth',
             'max_length': 256,
             'device': 'cuda' if torch.cuda.is_available() else 'cpu'
         }

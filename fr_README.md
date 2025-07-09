@@ -1,7 +1,7 @@
 # Projet d'IA Robotique
 ## Instructions d'Installation
 ### Téléchargement du Modèle
-1. Téléchargez le fichier de modèle (`.pth`) et son fichier de hachage correspondant (`.txt`) depuis la section **Releases** (intitulée "Robot_AI_Trained_Model").
+1. Téléchargez le fichier de modèle (`.pth`) et son fichier de hachage correspondant (`.txt`) depuis la section **Releases**: [Robot_AI_Trained_Model](https://github.com/IsmaTIBU/PatotIA/releases/tag/Robot_AI_TrainedModel)..
 2. Placez les deux fichiers dans le dossier `Backend/models` du projet.
 3. Pour vérifier que le modèle a été chargé correctement, exécutez `python verify_model` dans votre terminal.
 ### Étapes d'Exécution

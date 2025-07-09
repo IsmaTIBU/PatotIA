@@ -5,7 +5,7 @@
 ## Setup Instructions
 
 ### Downloading the Model
-1. Download the model file (`.pth`) and its corresponding hash file (`.txt`) from the **Releases** section :[Robot_AI_Trained_Model](https://github.com/IsmaTIBU/PatotIA/releases/tag/Robot_AI_TrainedModel).
+1. Download the model file (`.pth`) and its corresponding hash file (`.txt`) from the **Releases** section : [Robot_AI_Trained_Model](https://github.com/IsmaTIBU/PatotIA/releases/tag/Robot_AI_TrainedModel).
 2. Place both files in the `Backend/models` folder of the project.
 3. To verify the model was loaded correctly, run `python verify_model` in your terminal.
 

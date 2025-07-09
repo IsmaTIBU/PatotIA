@@ -1,3 +1,5 @@
+[Clickez ici pour lire le document traduit au français](fr_README.md)
+
 # Robot AI Project
 
 ## Setup Instructions

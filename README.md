@@ -45,4 +45,4 @@ You can access the application by either:
 
 ## Project Evolution
 - Development path: Ollama + pattern detection → FlanT5 → CodeT5
-- Achieved accuracy: 86.52% (over 100 tests)
+- Achieved accuracy: 92.94% (over 100 tests)

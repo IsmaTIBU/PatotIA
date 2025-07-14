@@ -1,6 +1,7 @@
 [Clickez ici pour lire le document traduit au français](fr_README.md)
 
 # Robot AI Project
+### Check [imonge.es](https://imonge.es/perso_proyecto/1?lang=en) for a more illustrative explanation
 
 ## Setup Instructions
 

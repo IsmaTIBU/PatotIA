@@ -1,4 +1,4 @@
-# Projet d'IA Robotique
+# PatotIA - Assistant IA pour calculs et simulation 3D
 ### *Pour un aperçu plus complet de mon travail, visitez mon portfolio sur [imonge.es](https://imonge.es/perso_proyecto/1?lang=fr).*
 ## Instructions d'Installation
 ### Téléchargement du Modèle

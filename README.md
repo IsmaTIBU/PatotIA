@@ -1,6 +1,6 @@
 [Clickez ici pour lire le document traduit au français](fr_README.md)
 
-# Robot AI Project
+# PatotAI - AI Assistant for calculations and 3D simulation
 ### *For a more complete overview of my work, visit my portfolio at [imonge.es](https://imonge.es/perso_proyecto/1?lang=en)*
 
 ## Setup Instructions

@@ -1,4 +1,5 @@
 # Projet d'IA Robotique
+### *Pour un aperçu plus complet de mon travail, visitez mon portfolio sur [imonge.es](https://imonge.es/perso_proyecto/1?lang=fr).*
 ## Instructions d'Installation
 ### Téléchargement du Modèle
 1. Téléchargez le fichier de modèle (`.pth`) et son fichier de hachage correspondant (`.txt`) depuis la section **Releases**: [Robot_AI_Trained_Model](https://github.com/IsmaTIBU/PatotIA/releases/tag/Robot_AI_TrainedModel).

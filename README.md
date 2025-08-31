@@ -1,4 +1,8 @@
-[Clickez ici pour lire le document traduit au français](fr_README.md)
+<div align="left">
+  <a href="fr_README.md">
+    <img src="https://img.shields.io/badge/lang-fr-blue">
+  </a>
+</div>
 
 # PatotAI - AI Assistant for calculations and 3D simulation
 ### *For a more complete overview of my work, visit my portfolio at [imonge.es](https://imonge.es/perso_proyecto/1?lang=en).*
